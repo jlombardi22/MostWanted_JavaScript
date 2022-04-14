@@ -213,9 +213,10 @@ function findPersonFamily(person, people) {
       return false;
     }
   });
-  function hasSpouse(trueOrFalse){
+
+  function hasParents(trueOrFalse){
     if (trueOrFalse.length === 0){
-        return 'No spouse'
+        return 'No parents'
     }else if(trueOrFalse[0].id === person.currentSpouse){
         let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
         return spouse;       
