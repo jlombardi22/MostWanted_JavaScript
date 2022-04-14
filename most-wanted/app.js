@@ -193,14 +193,39 @@ function chars(input) {
 function findPersonFamily(person, people) {
   let findSpouse = people.filter(function (el) {
     if (el.id === person.currentSpouse) {
-      return el.firstName;
-    } else {
+      return el;
+    } else if(el.currentSpouse === null) {
       return false;
     }
   });
+  function hasSpouse(trueOrFalse){
+    if (trueOrFalse.length === 0){
+        return 'No spouse'
+    }else if(trueOrFalse[0].id === person.currentSpouse){
+        let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
+        return spouse;       
+    }
+  }
+  let findParents = people.filter(function (el) {
+    if (el.id === person.currentSpouse) {
+      return el;
+    } else if(el.currentSpouse === null) {
+      return false;
+    }
+  });
+  function hasSpouse(trueOrFalse){
+    if (trueOrFalse.length === 0){
+        return 'No spouse'
+    }else if(trueOrFalse[0].id === person.currentSpouse){
+        let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
+        return spouse;       
+    }
+  }
 
   let familyInfo = `${person.firstName} ${person.lastName}'s family: \n\n`;
-  familyInfo += `Spouse:\n ${findSpouse}`;
+  familyInfo += `Spouse:\n ${hasSpouse(findSpouse)}`;
+  familyInfo += `Parents:\n ${hasParents(findSpouse)}`;
+  familyInfo += `Siblings:\n ${hasSiblings(findSpouse)}`;
 
   alert(familyInfo);
 }
