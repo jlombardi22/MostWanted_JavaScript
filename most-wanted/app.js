@@ -190,3 +190,29 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
+function findPersonFamily(person, people){
+    let findSpouse = people.filter(function(el){
+        if(person.currentSpouse !== el.id){
+            return true
+        }
+            return false
+    })
+    return findSpouse
+    // function validateSpouse(boolean){
+    //     if(boolean === true){
+    //         let spouse = `${findSpouse.firstName} ${findSpouse.lastName}`
+    //         return spouse
+    //     } else {
+    //         let spouse = 'No Spouse'
+    //         return spouse
+    //     }
+    // }
+
+    // let spouseResponse = validateSpouse(findSpouse)
+
+    
+    // let familyInfo = `${person.firstName} ${person.lastName}'s family: \n\n`
+    // familyInfo +=  `Spouse:\n ${spouseResponse}`
+    
+    alert(familyInfo);
+}
