@@ -190,46 +190,97 @@ function chars(input) {
 
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
-function findPersonFamily(person, people) {
-  let findSpouse = people.filter(function (el) {
-    if (el.id === person.currentSpouse) {
-      return el;
-    } else if(el.currentSpouse === null) {
-      return false;
-    }
-  });
-  function hasSpouse(trueOrFalse){
-    if (trueOrFalse.length === 0){
-        return 'No spouse'
-    }else if(trueOrFalse[0].id === person.currentSpouse){
-        let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
-        return spouse;       
-    }
-  }
-  let findParents = people.filter(function (el) {
-    if (el.id === person.currentSpouse) {
-      return el;
-    } else if(el.currentSpouse === null) {
-      return false;
-    }
-  });
+// function findPersonFamily(person, people) {
+//   let findSpouse = people.filter(function (el) {
+//     if (el.id === person.currentSpouse) {
+//       return el;
+//     } else if (el.currentSpouse === null) {
+//       return false;
+//     }
+//   });
+//   function hasSpouse(trueOrFalse) {
+//     if (trueOrFalse.length === 0) {
+//       return "No spouse";
+//     } else if (trueOrFalse[0].id === person.currentSpouse) {
+//       let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
+//       return spouse;
+//     }
+//   }
+//   let findParents = people.filter(function (el) {
+//     if (el.id === person.currentSpouse) {
+//       return el;
+//     } else if (el.currentSpouse === null) {
+//       return false;
+//     }
+//   });
 
-  function hasParents(trueOrFalse){
-    if (trueOrFalse.length === 0){
-        return 'No parents'
-    }else if(trueOrFalse[0].id === person.currentSpouse){
-        let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
-        return spouse;       
-    }
-  }
+//   function hasParents(trueOrFalse) {
+//     if (trueOrFalse.length === 0) {
+//       return "No parents";
+//     } else if (trueOrFalse[0].id === person.currentSpouse) {
+//       let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
+//       return spouse;
+//     }
+//   }
 
-  let familyInfo = `${person.firstName} ${person.lastName}'s family: \n\n`;
-  familyInfo += `Spouse:\n ${hasSpouse(findSpouse)}`;
-  familyInfo += `Parents:\n ${hasParents(findSpouse)}`;
-  familyInfo += `Siblings:\n ${hasSiblings(findSpouse)}`;
+//   let familyInfo = `${person.firstName} ${person.lastName}'s family: \n\n`;
+//   familyInfo += `Spouse:\n ${hasSpouse(findSpouse)}`;
+//   familyInfo += `Parents:\n ${hasParents(findSpouse)}`;
+//   // familyInfo += `Siblings:\n ${hasSiblings(findSpouse)}`;
 
-  alert(familyInfo);
-}
+//   alert(familyInfo);
+// }
 //compare a spouse to a list of spouses.
 //after comparing we need return that spouse out of that list
 //after finding in the list need to display the name
+// function hasSpouse(trueOrFalse) {
+//   if (trueOrFalse.length === 0) {
+//     return "No spouse";
+//   } else if (trueOrFalse[0].id === person.currentSpouse) {
+//     let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
+//     return spouse;
+//   }
+// }
+// function hasSpouse(trueOrFalse) {
+//     if (trueOrFalse.length === 0) {
+//       return "No spouse";
+//     } else if (trueOrFalse[0].id === person.currentSpouse) {
+//       let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
+//       return spouse;
+//     }
+//   }
+
+function findPersonFamily(person, people) {
+  let findSpouse = people.filter(el => {
+    if (el.id === person.currentSpouse) {
+      return el;
+    }
+  });
+  if (findSpouse.length === [0]) {
+    return "No Spouse";
+  } else if (findSpouse.id === person.currentSpouse) {
+    let spouse = `${findSpouse.firstName[0]} ${findSpouse.lastName} `;
+    return spouse;
+  }
+  let personFamily = `${person.firstName} ${person.lastName}'s family: \n\n`;
+  personFamily += `This is ${findSpouse[0]}`;
+  alert(personFamily);
+}
+
+function findPersonDescendants(person, people) {
+  let findParents = people.filter(el => {
+    if (el.id === person.parents) {
+      return el;
+    }
+  });
+  if (findParents.length === [0]) {
+    return "No Parents";
+  } else if (findParents.id === person.currentSpouse) {
+    let parent = `${findParents.firstName} ${findParents.lastName} `;
+    return parent;
+  }
+
+  let parentInfo = `${person.firstName}'s parents: \n\n`;
+  parentInfo += `Parents:\n ${findParents[0]}`;
+  alert(parentInfo);
+}
