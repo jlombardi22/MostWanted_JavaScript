@@ -234,7 +234,7 @@ function hasParents(person, people) {
 //
 function hasSiblings(person, people) {
   let findSiblings = people.filter(el => {
-    if (person.parents[0] === el.parents[0] && person.pa) {
+    if (person.parents.length >=1 && person.parents[0] === el.parents[0]) {
       return true;
     } else {
       return false;
@@ -249,55 +249,3 @@ function hasSiblings(person, people) {
   });
   return siblingInfo.toString().split(",").join(" ");
 }
-// function hasSpouse(trueOrFalse) {
-//   if (trueOrFalse.length === 0) {
-//     return "No spouse";
-//   } else if (trueOrFalse[0].id === person.currentSpouse) {
-//     let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
-//     return spouse;
-//   }
-// }
-// function hasSpouse(trueOrFalse) {
-//   if (trueOrFalse.length === 0) {
-//     return "No spouse";
-//   } else if (trueOrFalse[0].id === person.currentSpouse) {
-//     let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
-//     return spouse;
-//   }
-// }
-
-// function findPersonFamily(person, people) {
-//   let findSpouse = people.filter(el => {
-//     if (el.id === person.currentSpouse) {
-//       return el;
-//     }
-//   });
-//   if (findSpouse.length === 0) {
-//     return `${person.firstName} has no spouse`;
-//   } else if (findSpouse.id === person.currentSpouse) {
-//     let spouse = `${findSpouse.firstName[""]} ${findSpouse.lastName[""]} `;
-//     return spouse;
-//   }
-//   let personFamily = `${person.firstName} ${person.lastName}'s family: \n\n`;
-//   personFamily += `${findSpouse[0].firstName} is ${person.firstName}'s spouse`;
-//   personFamily += `Spouse:\n ${findSpouse[0].firstName} ${findSpouse[0].lastName}`;
-//   alert(personFamily);
-// }
-
-// function findPersonDescendants(person, people) {
-//   let findParents = people.filter(el => {
-//     if (el.id === person.parents) {
-//       return el;
-//     }
-//   });
-//   if (findParents.length === [""]) {
-//     return "No Parents";
-//   } else if (findParents.id === person.currentSpouse) {
-//     let parent = `${findParents[0].firstName} `;
-//     return parent;
-//   }
-
-//   let personDescendants = `${person.firstName}'s parents: \n\n`;
-//   personDescendants += `Parents:\n ${findParents[0]}`;
-//   alert(personDescendants);
-// }
