@@ -231,7 +231,7 @@ function hasParents(person, people) {
     return parent;
   }
 }
-//
+
 function hasSiblings(person, people) {
   let findSiblings = people.filter(el => {
     if (person.parents.length >=1 && person.parents[0] === el.parents[0] && person.id !== el.id) {
