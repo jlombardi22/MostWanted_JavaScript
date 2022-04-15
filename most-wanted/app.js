@@ -192,10 +192,10 @@ function chars(input) {
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 //
 function findPersonFamily(person, people) {
-  let familyInfo = `${person.firstName} ${person.lastName}'s family: \n\n`;
+  let familyInfo = `${person.firstName} ${person.lastName}'s family:\n\n`;
   familyInfo += `Spouse:\n${hasSpouse(person, people)}\n\n`;
-  familyInfo += `Parents:\n ${hasParents(person, people)}\n\n`;
-  familyInfo += `Siblings:\n ${hasSiblings(person, people)}`;
+  familyInfo += `Parents:\n${hasParents(person, people)}\n\n`;
+  familyInfo += `Siblings:\n${hasSiblings(person, people)}`;
 
   alert(familyInfo);
 }
@@ -234,7 +234,7 @@ function hasParents(person, people) {
 //
 function hasSiblings(person, people) {
   let findSiblings = people.filter(el => {
-    if (person.parents.length >=1 && person.parents[0] === el.parents[0]) {
+    if (person.parents.length >=1 && person.parents[0] === el.parents[0] && person.id !== el.id) {
       return true;
     } else {
       return false;
