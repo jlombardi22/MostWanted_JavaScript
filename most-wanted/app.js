@@ -73,7 +73,7 @@ function mainMenu(person, people) {
       //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
       // HINT: Look for a people-collection stringifier utility function to help
       let personFamily = findPersonFamily(person[0], people);
-      alert(personFamily);
+      //alert(personFamily);
       break;
     case "descendants":
       //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
@@ -191,7 +191,64 @@ function chars(input) {
 //////////////////////////////////////////* End Of Starter Code *//////////////////////////////////////////
 // Any additional functions can be written below this line 👇. Happy Coding! 😁
 //
+function findPersonFamily(person, people) {
+  let familyInfo = `${person.firstName} ${person.lastName}'s family: \n\n`;
+  familyInfo += `Spouse:\n${hasSpouse(person, people)}\n\n`;
+  familyInfo += `Parents:\n ${hasParents(person, people)}\n\n`;
+  familyInfo += `Siblings:\n ${hasSiblings(person, people)}`;
 
+  alert(familyInfo);
+}
+function hasSpouse(person, people) {
+  let findSpouse = people.filter(function (el) {
+    if (el.id === person.currentSpouse) {
+      return true;
+    } else if (el.currentSpouse === null) {
+      return false;
+    }
+  });
+  if (findSpouse.length === 0) {
+    return "No spouse";
+  } else if (findSpouse[0].id === person.currentSpouse) {
+    let spouse = `${findSpouse[0].firstName} ${findSpouse[0].lastName} `;
+    return spouse;
+  }
+}
+
+function hasParents(person, people) {
+  let findParents = people.filter(function (el) {
+    if (person.parents.includes(el.id)) {
+      return true;
+    }
+  });
+  if (findParents.length === 0) {
+    return "No parents";
+  } else if (findParents.length === 2) {
+    let twoParents = `${findParents[0].firstName} ${findParents[0].lastName}\n${findParents[1].firstName} ${findParents[1].lastName}`;
+    return twoParents;
+  } else if (findParents.length === 1) {
+    let parent = `${findParents[0].firstName} ${findParents[0].lastName}`;
+    return parent;
+  }
+}
+//
+function hasSiblings(person, people) {
+  let findSiblings = people.filter(el => {
+    if (person.parents[0] === el.parents[0] && person.pa) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  if (findSiblings.length === 0) {
+    return "No siblings";
+  }
+
+  let siblingInfo = findSiblings.map(el => {
+    return `${el.firstName} ${el.lastName}\n`;
+  });
+  return siblingInfo.toString().split(",").join(" ");
+}
 // function hasSpouse(trueOrFalse) {
 //   if (trueOrFalse.length === 0) {
 //     return "No spouse";
