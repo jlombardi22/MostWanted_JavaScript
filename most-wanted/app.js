@@ -79,7 +79,7 @@ function mainMenu(person, people) {
       //! TODO #3: Declare a findPersonDescendants function //////////////////////////////////////////
       // HINT: Review recursion lecture + demo for bonus user story
       let personDescendants = findPersonDescendants(person[0], people);
-      alert(personDescendants);
+      // alert(personDescendants);
       break;
     case "restart":
       // Restart app() from the very beginning
@@ -234,7 +234,11 @@ function hasParents(person, people) {
 
 function hasSiblings(person, people) {
   let findSiblings = people.filter(el => {
-    if (person.parents.length >=1 && person.parents[0] === el.parents[0] && person.id !== el.id) {
+    if (
+      person.parents.length >= 1 &&
+      person.parents[0] === el.parents[0] &&
+      person.id !== el.id
+    ) {
       return true;
     } else {
       return false;
@@ -249,3 +253,32 @@ function hasSiblings(person, people) {
   });
   return siblingInfo.toString().split(",").join(" ");
 }
+
+function findPersonDescendants(person, people) {
+  let descInfo = `${person.firstName} ${person.lastName}'s descendants:\n\n`;
+  descInfo += `${hasChildren(person, people)}`;
+  // descInfo += `Parents:\n${hasParents(person, people)}\n\n`;
+  // descInfo += `Siblings:\n${hasSiblings(person, people)}`;
+
+  alert(descInfo);
+}
+
+function hasChildren(person, people) {
+  let findChildren = people.filter(el => {
+    if (el.parents.length >= 1 && el.parents.includes(person.id)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
+  if (findChildren === 0) {
+    return "No descendants";
+  }
+  let foundChildren = findChildren.map(el => {
+    return `${el.firstName}`;
+  });
+  return foundChildren.toString().split(",").join(" ");
+}
+
+function hasGrandChildren(person, people) {}
+// (person.id === el.parents[0] || person.id === el.parents[1])
