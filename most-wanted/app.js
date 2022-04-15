@@ -256,14 +256,15 @@ function findPersonFamily(person, people) {
       return el;
     }
   });
-  if (findSpouse.length === [0]) {
-    return "No Spouse";
+  if (findSpouse.length === 0) {
+    return `${person.firstName} has no spouse`;
   } else if (findSpouse.id === person.currentSpouse) {
-    let spouse = `${findSpouse.firstName[0]} ${findSpouse.lastName} `;
+    let spouse = `${findSpouse.firstName[""]} ${findSpouse.lastName[""]} `;
     return spouse;
   }
   let personFamily = `${person.firstName} ${person.lastName}'s family: \n\n`;
-  personFamily += `This is ${findSpouse[0]}`;
+  // personFamily += `${findSpouse[0].firstName} is ${person.firstName}'s spouse`;
+  personFamily += `Spouse:\n ${findSpouse[0].firstName} ${findSpouse[0].lastName}`;
   alert(personFamily);
 }
 
