@@ -89,8 +89,6 @@ function mainMenu(person, people) {
     case "quit":
       // Stop application execution
       return;
-    case "eyecolor":
-      let personWithEyeColor = searchCriteria(trait, people);
     default:
       // Prompt user again. Another instance of recursion
       return mainMenu(person, people);
@@ -121,16 +119,66 @@ function searchByName(people) {
 
 function searchByTraits(people) {
   let searchTrait = promptFor(
-    "What eye color would you like to search?",
+    "What trait would you like to search?\nEx. eyecolor, gender, occupation, height, weight",
     chars
-  );
+  ).toLowerCase();
+  
 
-  let personWithEyeColor = people.filter(person => {
-    if (person.eyecolor.toLowerCase() === searchTrait.toLowerCase()) {
-      return true;
-    }
-  });
-  return personWithEyeColor;
+  switch (searchTrait) {
+    case "eyecolor":
+        let eyecolor = promptFor('Enter eyecolor. ', chars).toLowerCase()
+        let personWithEyeColor = people.filter(el => {
+            if (el.eyeColor === eyecolor) {
+              return true;
+            } else {
+                return false
+            }
+          });
+          return personWithEyeColor;
+    case "gender":
+        let gender = promptFor('Enter gender. ', chars).toLowerCase()
+        let personWithGender = people.filter(el => {
+            if (el.gender === gender) {
+              return true;
+            } else {
+                return false
+            }
+          });
+          return personWithGender;
+    case "occupation":
+        let occupation = promptFor('Enter occupation. ', chars).toLowerCase()
+        let personWithJob = people.filter(el => {
+            if (el.occupation === occupation) {
+              return true;
+            } else {
+                return false
+            }
+          });
+          return personWithJob;
+    case "weight":
+        let weight = promptFor('Enter weight', chars).toString()
+        let personWithWeight = people.filter(el => {
+            if (el.weight === parseInt(weight)) {
+              return true;
+            } else {
+                return false
+            }
+          });
+          return personWithWeight;
+    case "height":
+        let height = promptFor('Enter height. ', chars).toString()
+        let personWithHeight = people.filter(el => {
+            if (el.height === parseInt(height)) {
+              return true;
+            } else {
+                return false
+            }
+          });
+          return personWithHeight;
+    default:
+      // Prompt user again. Another instance of recursion
+      return mainMenu(person, people);
+  }
 }
 
 /**
@@ -313,6 +361,3 @@ function hasDescendants(person, people) {
   return foundGrandChildren.toString().split(",").join(" ");
 }
 
-function searchCriteria(people) {
-  let;
-}
