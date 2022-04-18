@@ -32,8 +32,6 @@ function app(people) {
       //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
       //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
       searchResults = searchByTraits(people);
-
-      break;
     default:
       // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
       app(people);
@@ -217,7 +215,7 @@ function searchByTraits(people) {
           }
     default:
       // Prompt user again. Another instance of recursion
-      return mainMenu(person, people);
+      return searchByTraits(people);
   }
 }
 
