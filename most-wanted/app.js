@@ -134,7 +134,15 @@ function searchByTraits(people) {
                 return false
             }
           });
-          return personWithEyeColor;
+          if(personWithEyeColor.length > 1){
+            let  peopleWithEyeColor = personWithEyeColor.map(el=>{
+                return `${el.firstName} ${el.lastName}\n`
+            })
+            alert(peopleWithEyeColor.toString().split(",").join(" "))
+            return app(people)
+          } else {
+            return personWithEyeColor
+          }
     case "gender":
         let gender = promptFor('Enter gender. ', chars).toLowerCase()
         let personWithGender = people.filter(el => {
@@ -144,7 +152,15 @@ function searchByTraits(people) {
                 return false
             }
           });
-          return personWithGender;
+          if(personWithGender.length > 1){
+            let  peopleWithGender = personWithGender.map(el=>{
+                return `${el.firstName} ${el.lastName}\n`
+            })
+            alert(peopleWithGender.toString().split(",").join(" "))
+            return app(people)
+          } else {
+            return personWithGender
+          }
     case "occupation":
         let occupation = promptFor('Enter occupation. ', chars).toLowerCase()
         let personWithJob = people.filter(el => {
@@ -154,7 +170,15 @@ function searchByTraits(people) {
                 return false
             }
           });
-          return personWithJob;
+          if(personWithJob.length > 1){
+            let  peopleWithJobs = personWithJob.map(el=>{
+                return `${el.firstName} ${el.lastName}\n`
+            })
+            alert(peopleWithJobs.toString().split(",").join(" "))
+            return app(people)
+          } else {
+            return personWithJob
+          }
     case "weight":
         let weight = promptFor('Enter weight', chars).toString()
         let personWithWeight = people.filter(el => {
@@ -164,7 +188,15 @@ function searchByTraits(people) {
                 return false
             }
           });
-          return personWithWeight;
+          if(personWithWeight.length > 1){
+            let  peopleWithWeight = personWithWeight.map(el=>{
+                return `${el.firstName} ${el.lastName}\n`
+            })
+            alert(peopleWithWeight.toString().split(",").join(" "))
+            return app(people)
+          } else {
+            return personWithWeight
+          }
     case "height":
         let height = promptFor('Enter height. ', chars).toString()
         let personWithHeight = people.filter(el => {
@@ -174,7 +206,15 @@ function searchByTraits(people) {
                 return false
             }
           });
-          return personWithHeight;
+          if(personWithHeight.length > 1){
+            let  peopleWithHeight = personWithHeight.map(el=>{
+                return `${el.firstName} ${el.lastName}\n`
+            })
+            alert(peopleWithHeight.toString().split(",").join(" "))
+            return app(people)
+          } else {
+            return personWithHeight
+          }
     default:
       // Prompt user again. Another instance of recursion
       return mainMenu(person, people);
