@@ -256,31 +256,12 @@ function hasSiblings(person, people) {
 
 function findPersonDescendants(person, people) {
   let descInfo = `${person.firstName} ${person.lastName}'s descendants:\n\n`;
-  descInfo += `${hasChildren(person, people)}\n`;
-  descInfo += `${hasGrandChildren(person, people)}\n\n`;
-  // descInfo += `Siblings:\n${hasSiblings(person, people)}`;
+  descInfo += `${hasDescendants(person, people)}\n\n`;
 
   alert(descInfo);
 }
 
-function hasChildren(person, people) {
-  let findChildren = people.filter(el => {
-    if (el.parents.length >= 1 && el.parents.includes(person.id)) {
-      return true;
-    } else {
-      return false;
-    }
-  });
-  if (findChildren === 0) {
-    return "No descendants";
-  }
-  let foundChildren = findChildren.map(el => {
-    return `${el.firstName} ${el.lastName}\n`;
-  });
-  return foundChildren.toString().split(",").join(" ");
-}
-
-function hasGrandChildren(person, people) {
+function hasDescendants(person, people) {
     let findGrandChildren = people.filter(el => {
         if (el.parents.length >= 1 && el.parents.includes(person.id)) {
           return true;
@@ -288,21 +269,26 @@ function hasGrandChildren(person, people) {
           return false;
         }
       });
-
-    
-
-      let findParents = findGrandChildren.filter(el=>{
-      })
-
-     let descendants = findGrandChildren.concat(findParents)
-
-     if (findGrandChildren === 0) {
+      
+      if (findGrandChildren.length === 0) {
         return "No descendants";
       }
-      let foundGrandChildren = descendants.map(el => {
+    
+      let children = []
+      let findParents = people.filter(el=>{
+          for(var i = 0; i < findGrandChildren.length; i++){
+            if(el.parents.length >= 1 && el.parents.includes(findGrandChildren[i].id)){
+                children.push(el)
+                return true
+            }
+        }
+        return children 
+      })
+
+     let descendants = findGrandChildren.concat(children)
+     let foundGrandChildren = descendants.map(el => {
         return `${el.firstName} ${el.lastName}\n`;
       });
       return foundGrandChildren.toString().split(",").join(" ");
-
 }
-// (person.id === el.parents[0] || person.id === el.parents[1])
+
