@@ -256,8 +256,8 @@ function hasSiblings(person, people) {
 
 function findPersonDescendants(person, people) {
   let descInfo = `${person.firstName} ${person.lastName}'s descendants:\n\n`;
-  descInfo += `${hasChildren(person, people)}`;
-  // descInfo += `Parents:\n${hasParents(person, people)}\n\n`;
+  descInfo += `${hasChildren(person, people)}\n`;
+  descInfo += `${hasGrandChildren(person, people)}\n\n`;
   // descInfo += `Siblings:\n${hasSiblings(person, people)}`;
 
   alert(descInfo);
@@ -275,10 +275,34 @@ function hasChildren(person, people) {
     return "No descendants";
   }
   let foundChildren = findChildren.map(el => {
-    return `${el.firstName}`;
+    return `${el.firstName} ${el.lastName}\n`;
   });
   return foundChildren.toString().split(",").join(" ");
 }
 
-function hasGrandChildren(person, people) {}
+function hasGrandChildren(person, people) {
+    let findGrandChildren = people.filter(el => {
+        if (el.parents.length >= 1 && el.parents.includes(person.id)) {
+          return true;
+        } else {
+          return false;
+        }
+      });
+
+    
+
+      let findParents = findGrandChildren.filter(el=>{
+      })
+
+     let descendants = findGrandChildren.concat(findParents)
+
+     if (findGrandChildren === 0) {
+        return "No descendants";
+      }
+      let foundGrandChildren = descendants.map(el => {
+        return `${el.firstName} ${el.lastName}\n`;
+      });
+      return foundGrandChildren.toString().split(",").join(" ");
+
+}
 // (person.id === el.parents[0] || person.id === el.parents[1])
