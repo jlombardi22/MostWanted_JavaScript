@@ -32,6 +32,7 @@ function app(people) {
       //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
       //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
       searchResults = searchByTraits(people);
+
       break;
     default:
       // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
@@ -88,6 +89,8 @@ function mainMenu(person, people) {
     case "quit":
       // Stop application execution
       return;
+    case "eyecolor":
+      let personWithEyeColor = searchCriteria(trait, people);
     default:
       // Prompt user again. Another instance of recursion
       return mainMenu(person, people);
@@ -113,7 +116,22 @@ function searchByName(people) {
   });
   return foundPerson;
 }
+
 // End of searchByName()
+
+function searchByTraits(people) {
+  let searchTrait = promptFor(
+    "What eye color would you like to search?",
+    chars
+  );
+
+  let personWithEyeColor = people.filter(person => {
+    if (person.eyecolor.toLowerCase() === searchTrait.toLowerCase()) {
+      return true;
+    }
+  });
+  return personWithEyeColor;
+}
 
 /**
  * This function will be useful for STRINGIFYING a collection of person-objects
@@ -262,33 +280,39 @@ function findPersonDescendants(person, people) {
 }
 
 function hasDescendants(person, people) {
-    let findGrandChildren = people.filter(el => {
-        if (el.parents.length >= 1 && el.parents.includes(person.id)) {
-          return true;
-        } else {
-          return false;
-        }
-      });
-      
-      if (findGrandChildren.length === 0) {
-        return "No descendants";
-      }
-    
-      let children = []
-      let findParents = people.filter(el=>{
-          for(var i = 0; i < findGrandChildren.length; i++){
-            if(el.parents.length >= 1 && el.parents.includes(findGrandChildren[i].id)){
-                children.push(el)
-                return true
-            }
-        }
-        return children 
-      })
+  let findGrandChildren = people.filter(el => {
+    if (el.parents.length >= 1 && el.parents.includes(person.id)) {
+      return true;
+    } else {
+      return false;
+    }
+  });
 
-     let descendants = findGrandChildren.concat(children)
-     let foundGrandChildren = descendants.map(el => {
-        return `${el.firstName} ${el.lastName}\n`;
-      });
-      return foundGrandChildren.toString().split(",").join(" ");
+  if (findGrandChildren.length === 0) {
+    return "No descendants";
+  }
+
+  let children = [];
+  let findParents = people.filter(el => {
+    for (var i = 0; i < findGrandChildren.length; i++) {
+      if (
+        el.parents.length >= 1 &&
+        el.parents.includes(findGrandChildren[i].id)
+      ) {
+        children.push(el);
+        return true;
+      }
+    }
+    return children;
+  });
+
+  let descendants = findGrandChildren.concat(children);
+  let foundGrandChildren = descendants.map(el => {
+    return `${el.firstName} ${el.lastName}\n`;
+  });
+  return foundGrandChildren.toString().split(",").join(" ");
 }
 
+function searchCriteria(people) {
+  let;
+}
