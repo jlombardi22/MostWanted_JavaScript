@@ -32,6 +32,7 @@ function app(people) {
       //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
       //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
       searchResults = searchByTraits(people);
+      let searchResultTwo = searchByTraits(searchResults)
     default:
       // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
       app(people);
@@ -132,15 +133,23 @@ function searchByTraits(people) {
                 return false
             }
           });
-          if(personWithEyeColor.length > 1){
-            let  peopleWithEyeColor = personWithEyeColor.map(el=>{
-                return `${el.firstName} ${el.lastName}\n`
-            })
-            alert(peopleWithEyeColor.toString().split(",").join(" "))
-            return app(people)
-          } else {
-            return personWithEyeColor
+          
+          
+          let narrowSearch = promptFor('Would you like to search another trait? ', chars).toLowerCase()
+          if(narrowSearch === 'yes'){
+            searchByTraits(personWithEyeColor)
+          } else if(personWithEyeColor.length > 1){
+                let  peopleWithEyeColor = personWithEyeColor.map(el=>{
+                    return `${el.firstName} ${el.lastName}\n`
+                })
+                alert(peopleWithEyeColor.toString().split(",").join(" "))
+                return app(people)
+            } else {
+                return personWithEyeColor
           }
+        app(people)
+          
+
     case "gender":
         let gender = promptFor('Enter gender. ', chars).toLowerCase()
         let personWithGender = people.filter(el => {
@@ -169,7 +178,7 @@ function searchByTraits(people) {
             }
           });
           if(personWithJob.length > 1){
-            let  peopleWithJobs = personWithJob.map(el=>{
+            let peopleWithJobs = personWithJob.map(el=>{
                 return `${el.firstName} ${el.lastName}\n`
             })
             alert(peopleWithJobs.toString().split(",").join(" "))
@@ -248,7 +257,7 @@ function displayPerson(person) {
   personInfo += `DOB: ${person.dob}\n`;
   personInfo += `Height: ${person.height}\n`;
   personInfo += `Weight: ${person.weight}\n`;
-  personInfo += `Eye Color: ${person.eyecolor}\n`;
+  personInfo += `Eye Color: ${person.eyeColor}\n`;
   personInfo += `Occupation: ${person.occupation}\n`;
   //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
   alert(personInfo);
