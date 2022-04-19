@@ -32,7 +32,6 @@ function app(people) {
       //! TODO #4: Declare a searchByTraits (multiple traits) function //////////////////////////////////////////
       //! TODO #4a: Provide option to search for single or multiple //////////////////////////////////////////
       searchResults = searchByTraits(people);
-      let searchResultTwo = searchByTraits(searchResults)
     default:
       // Re-initializes the app() if neither case was hit above. This is an instance of recursion.
       app(people);
@@ -67,7 +66,6 @@ function mainMenu(person, people) {
       //! TODO #1: Utilize the displayPerson function //////////////////////////////////////////
       // HINT: Look for a person-object stringifier utility function to help
       let personInfo = displayPerson(person[0]);
-      alert(personInfo);
       break;
     case "family":
       //! TODO #2: Declare a findPersonFamily function //////////////////////////////////////////
@@ -133,23 +131,18 @@ function searchByTraits(people) {
                 return false
             }
           });
-          
-          
-          let narrowSearch = promptFor('Would you like to search another trait? ', chars).toLowerCase()
-          if(narrowSearch === 'yes'){
+          let searchPeopleWithEyeColor = promptFor('Would you like to search another trait? ', yesNo).toLowerCase()
+          if(searchPeopleWithEyeColor === 'yes'){
             searchByTraits(personWithEyeColor)
-          } else if(personWithEyeColor.length > 1){
+          } else if(personWithEyeColor.length >= 2){
                 let  peopleWithEyeColor = personWithEyeColor.map(el=>{
                     return `${el.firstName} ${el.lastName}\n`
                 })
                 alert(peopleWithEyeColor.toString().split(",").join(" "))
-                return app(people)
+                return app(people);
             } else {
-                return personWithEyeColor
+                return mainMenu(personWithEyeColor)
           }
-        app(people)
-          
-
     case "gender":
         let gender = promptFor('Enter gender. ', chars).toLowerCase()
         let personWithGender = people.filter(el => {
@@ -159,15 +152,18 @@ function searchByTraits(people) {
                 return false
             }
           });
-          if(personWithGender.length > 1){
-            let  peopleWithGender = personWithGender.map(el=>{
-                return `${el.firstName} ${el.lastName}\n`
-            })
-            alert(peopleWithGender.toString().split(",").join(" "))
-            return app(people)
-          } else {
-            return personWithGender
-          }
+          let searchPeopleWithGender = promptFor('Would you like to search another trait? ', yesNo).toLowerCase()
+          if(searchPeopleWithGender === 'yes'){
+              searchByTraits(personWithGender)
+          } else if(personWithGender.length >= 2){
+                let  peopleWithGender = personWithGender.map(el=>{
+                    return `${el.firstName} ${el.lastName}\n`
+                })
+                alert(peopleWithGender.toString().split(",").join(" "))
+                return app(people);
+            } else {
+                return mainMenu(personWithGender, people)
+            }
     case "occupation":
         let occupation = promptFor('Enter occupation. ', chars).toLowerCase()
         let personWithJob = people.filter(el => {
@@ -177,15 +173,17 @@ function searchByTraits(people) {
                 return false
             }
           });
-          if(personWithJob.length > 1){
-            let peopleWithJobs = personWithJob.map(el=>{
-                return `${el.firstName} ${el.lastName}\n`
-            })
-            alert(peopleWithJobs.toString().split(",").join(" "))
-            return app(people)
-          } else {
-            return personWithJob
-          }
+          let searchPeopleWithJob = promptFor('Would you like to search another trait? ', yesNo).toLowerCase()
+          if(searchPeopleWithJob === 'yes'){
+              searchByTraits(personWithJob)
+          } else if(personWithJob.length >= 2){
+                let peopleWithJobs = personWithJob.map(el=>{
+                    return `${el.firstName} ${el.lastName}\n`
+                })
+                alert(peopleWithJobs.toString().split(",").join(" "))
+                return app(people);
+            } 
+        return mainMenu(personWithJob, people)
     case "weight":
         let weight = promptFor('Enter weight', chars).toString()
         let personWithWeight = people.filter(el => {
@@ -195,15 +193,18 @@ function searchByTraits(people) {
                 return false
             }
           });
-          if(personWithWeight.length > 1){
-            let  peopleWithWeight = personWithWeight.map(el=>{
-                return `${el.firstName} ${el.lastName}\n`
-            })
-            alert(peopleWithWeight.toString().split(",").join(" "))
-            return app(people)
-          } else {
-            return personWithWeight
-          }
+          let searchPeopleWithWeight = promptFor('Would you like to search another trait? ', yesNo).toLowerCase()
+          if(searchPeopleWithWeight === 'yes'){
+              searchByTraits(personWithWeight)
+          } else if(personWithWeight.length >= 2){
+                let  peopleWithWeight = personWithWeight.map(el=>{
+                    return `${el.firstName} ${el.lastName}\n`
+                })
+                alert(peopleWithWeight.toString().split(",").join(" "))
+                return app(people);
+            } else {
+                return mainMenu(personWithWeight, people)
+            }
     case "height":
         let height = promptFor('Enter height. ', chars).toString()
         let personWithHeight = people.filter(el => {
@@ -213,15 +214,18 @@ function searchByTraits(people) {
                 return false
             }
           });
-          if(personWithHeight.length > 1){
-            let  peopleWithHeight = personWithHeight.map(el=>{
-                return `${el.firstName} ${el.lastName}\n`
-            })
-            alert(peopleWithHeight.toString().split(",").join(" "))
-            return app(people)
-          } else {
-            return personWithHeight
-          }
+          let searchPeopleWithHeight = promptFor('Would you like to search another trait? ', yesNo).toLowerCase()
+          if(searchPeopleWithHeight === 'yes'){
+              searchByTraits(personWithHeight)
+          } else if(personWithHeight.length >= 2){
+                let  peopleWithHeight = personWithHeight.map(el=>{
+                    return `${el.firstName} ${el.lastName}\n`
+                })
+                alert(peopleWithHeight.toString().split(",").join(" "))
+                return app(people);
+            } else {
+                return mainMenu(personWithHeight)
+            }
     default:
       // Prompt user again. Another instance of recursion
       return searchByTraits(people);
@@ -257,7 +261,7 @@ function displayPerson(person) {
   personInfo += `DOB: ${person.dob}\n`;
   personInfo += `Height: ${person.height}\n`;
   personInfo += `Weight: ${person.weight}\n`;
-  personInfo += `Eye Color: ${person.eyeColor}\n`;
+  personInfo += `EyeColor: ${person.eyeColor}\n`;
   personInfo += `Occupation: ${person.occupation}\n`;
   //! TODO #1a: finish getting the rest of the information to display //////////////////////////////////////////
   alert(personInfo);
